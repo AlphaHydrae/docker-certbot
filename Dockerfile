@@ -1,11 +1,11 @@
-FROM ubuntu:trusty
+FROM debian:jessie
 
-MAINTAINER Simon Oulevay (Alpha Hydrae) <docker@alphahydrae.com>
+LABEL maintainer="docker@alphahydrae.com"
 
-RUN apt-get update \
-    && apt-get install -q -y wget
-RUN wget -O /usr/local/bin/certbot-auto https://dl.eff.org/certbot-auto
-RUN chmod 755 /usr/local/bin/certbot-auto
-RUN /usr/local/bin/certbot-auto --non-interactive
+ADD https://dl.eff.org/certbot-auto /usr/local/bin/certbot-auto
+
+RUN chmod +x /usr/local/bin/certbot-auto
+
+RUN /usr/local/bin/certbot-auto --non-interactive --os-packages-only
 
 CMD [ "/bin/bash" ]
