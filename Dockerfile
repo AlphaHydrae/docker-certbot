@@ -1,11 +1,7 @@
-FROM debian:jessie
+FROM alpine:3.11
 
 LABEL maintainer="docker@alphahydrae.com"
 
-ADD https://dl.eff.org/certbot-auto /usr/local/bin/certbot-auto
-
-RUN chmod +x /usr/local/bin/certbot-auto
-
-RUN /usr/local/bin/certbot-auto --non-interactive --os-packages-only
+RUN apk add --no-cache bash certbot
 
 CMD [ "/bin/bash" ]
